@@ -31,6 +31,7 @@ public final class MineAMob {
                 VANILLA_MOBS.add(type);
             }
         }
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -39,6 +40,12 @@ public final class MineAMob {
         if (!(event.getLevel() instanceof ServerLevel level)) {
             return;
         }
+
+        // Only spawn a mob 20% of the time.
+        if (level.getRandom().nextFloat() >= 0.20F) {
+            return;
+        }
+
         if (VANILLA_MOBS.isEmpty()) {
             return;
         }
